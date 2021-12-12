@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  root 'albums#index'
-  get 'albums/:id', to: 'albums#show' 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'pages#index'
+  namespace :api do
+    namespace :v1 do
+      resources :albums, param: :id 
+      resources :users, param: :id
+    end
+  end
+
+  get '*path', to: 'pages#index', via: :all
 end
