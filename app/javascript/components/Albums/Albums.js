@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
+import Album from "./Album";
 
 const Albums = () => {
     const [albums, setAlbums] = useState([])
@@ -13,7 +14,12 @@ const Albums = () => {
     }, [albums.length])
 
     const list = albums.map( item => {
-        return (<li key={item.id}>{item.id}</li>)
+        return (
+            <Album 
+                key={item.id}
+                attributes={item}
+            />
+        )
     })
 
     return (
