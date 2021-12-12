@@ -6,7 +6,7 @@ const Albums = () => {
     const [albums, setAlbums] = useState([])
 
     useEffect(() => {
-        axios.get('api/v1/albums.json')
+        axios.get('api/v1/albums')
         .then( resp => {
             setAlbums(resp.data)
         })
@@ -28,9 +28,9 @@ const Albums = () => {
                 <h1>Albums List</h1>
                 <div className="sub-header">This is the Albums#index view for our app.</div>
             </div>
-            
+            <br/>
             <div className="container">
-                <div className="card-deck row">{grid}</div>    
+                <div className="row">{grid}</div>    
             </div>
             
         </div>
