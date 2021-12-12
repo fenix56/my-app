@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Album = (props) => {
     return (
         <div className="card">
-            <div className="album-logo"><img src="https://via.placeholder.com/150/877cd8" /></div>
-            <div className="album-title">{props.attributes.title}</div>
-            <div className="album-owner-name">{props.attributes.name}</div>
-            <div className="album-link">
-                <a href={`/albums/${props.attributes.id}`}>View Album</a>
+            <img className="card-img-top" src="https://via.placeholder.com/150/877cd8" />
+            <div className="card-body">
+                <h5 className="card-title">{props.attributes.title}</h5>
+                <p className="card-text">This album is owned by <b>{props.attributes.name}</b></p>
+                <Link to={`/albums/${props.attributes.id}`} className="btn btn-primary">View Album</Link>
             </div>
         </div>
     )

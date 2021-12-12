@@ -13,7 +13,7 @@ const Albums = () => {
         .catch( resp => console.log(resp) )
     }, [albums.length])
 
-    const list = albums.map( item => {
+    const grid = albums.map( item => {
         return (
             <Album 
                 key={item.id}
@@ -29,8 +29,8 @@ const Albums = () => {
                 <div className="sub-header">This is the Albums#index view for our app.</div>
             </div>
             
-            <div className="grid">
-                <ul>{list}</ul>    
+            <div className="container">
+                <div className="">{grid}</div>    
             </div>
             
         </div>
