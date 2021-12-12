@@ -16,11 +16,11 @@ module Api
       def show
         album_id = params[:id]
         album_details = HTTParty.get(API_URL + "photos?albumId=" + album_id, headers: HEADERS)
-        response = album_details.to_a
+        details_hash = album_details.to_a
         album = HTTParty.get(API_URL + "albums/" + album_id, headers: HEADERS)
         user_id = album.to_h
         user = HTTParty.get(API_URL + "users/" + user_id["userId"].to_s, headers: HEADERS)
-        p user.body
+        response = {"userData" => user, "albumData" => details_hash }
         render json: response
       end
     end

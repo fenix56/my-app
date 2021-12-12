@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 
 const Albums = () => {
@@ -6,12 +6,28 @@ const Albums = () => {
 
     useEffect(() => {
         axios.get('api/v1/albums.json')
-        .then( response => console.log(response) )
-        .catch( response => console.log(response) )
+        .then( resp => {
+            setAlbums(resp.data)
+        })
+        .catch( resp => console.log(resp) )
     }, [albums.length])
 
+    const list = albums.map( item => {
+        return (<li key={item.id}>{item.id}</li>)
+    })
+
     return (
-     <div>This is the Albums#index view for our app.</div>
+        <div className="home">
+            <div className="header">
+                <h1>Albums List</h1>
+                <div className="sub-header">This is the Albums#index view for our app.</div>
+            </div>
+            
+            <div className="grid">
+                <ul>{list}</ul>    
+            </div>
+            
+        </div>
     )
 }
 
