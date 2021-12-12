@@ -8,7 +8,8 @@ const App = () => {
     return(
       <Router>
         <Routes>
-          <Route exact path="/" element={<Albums />}></Route>
+          <Route path="/" element={<Albums />}></Route> 
+          <Route path="/albums" element={<Albums />}></Route> 
           <Route exact path="/albums/:id" element={<Album />}></Route>
         </Routes>
       </Router>

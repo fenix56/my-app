@@ -30,7 +30,7 @@ const Albums = () => {
             </div>
             
             <div className="container">
-                <div className="">{grid}</div>    
+                <div className="card-deck row">{grid}</div>    
             </div>
             
         </div>

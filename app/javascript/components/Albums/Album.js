@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const cardStyle = {
+    width: '15rem',
+};
+
 const Album = (props) => {
     return (
-        <div className="card">
+        <div className="card" style={cardStyle}>
             <img className="card-img-top" src="https://via.placeholder.com/150/877cd8" />
             <div className="card-body">
                 <h5 className="card-title">{props.attributes.title}</h5>
