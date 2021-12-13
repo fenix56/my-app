@@ -1,27 +1,21 @@
 module Api
   module V1
     class AlbumsController < ApplicationController
-      API_URL = "https://jsonplaceholder.typicode.com/".freeze
-      HEADERS = { "Accept" => "application/json" }
     
       def index
-        albums = HTTParty.get(API_URL + "albums/",  headers: HEADERS)
-        users = HTTParty.get(API_URL + "users/", headers: HEADERS)
-        albums_arr = albums.to_a
-        users_arr = users.to_a
-        response = albums_arr.each {|obj| obj["name"] = users_arr[obj["userId"]-1]["name"]}
-        render json: response
+        @albums = Album.all
+        @users = User.all
+        @albums.each do |album|
+          album.user = @users.find { |user| user.id == album.userId }
+        end
+        render json: @albums
       end
     
       def show
-        album_id = params[:id]
-        album_details = HTTParty.get(API_URL + "photos?albumId=" + album_id, headers: HEADERS)
-        details_hash = album_details.to_a
-        album = HTTParty.get(API_URL + "albums/" + album_id, headers: HEADERS)
-        user_id = album.to_h
-        user = HTTParty.get(API_URL + "users/" + user_id["userId"].to_s, headers: HEADERS)
-        response = {"userData" => user, "albumData" => details_hash }
-        render json: response
+        @album = Album.find(params[:id])
+        @album.user = User.find(@album.userId)
+        @album.photos = Photo.all(@album.id)
+        render json: @album.to_json
       end
     end
   end
