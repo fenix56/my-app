@@ -5,7 +5,8 @@ import Album from "./Album";
 
 const Albums = () => {
   const [albums, setAlbums] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(0);
 
   const { page } = useParams();
 
@@ -20,11 +21,23 @@ const Albums = () => {
       .then(resp => {
         setAlbums(resp.data.data)
         setCurrentPage(resp.data.page)
+        setMaxPages(resp.data.pages)
       })
       .catch(resp => console.log(resp))
   }, [])
 
-  console.log(albums)
+  let rows = []
+  for(let i=1; i <= maxPages; i++){
+    rows.push(i)
+  }
+
+const page_grid = rows.map(item => {
+  return (
+    <li className="page-item">
+      <Link className="page-link" to={`?page=${item}`} > {item} </Link>
+    </li>
+  )
+})
 
   const grid = albums.map(item => {
     return (
@@ -37,7 +50,14 @@ const Albums = () => {
 
   return (
     <div>
+      <nav>
+        <ul className="pagination justify-content-center">
+          {page_grid}
+        </ul>
+      </nav>
+
       <br />
+
       <div className="container">
         <div className="row">{grid}</div>
       </div>
